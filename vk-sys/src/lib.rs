@@ -12,6 +12,9 @@
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
 
+extern crate paste;
+use paste::paste;
+
 use std::ffi::CStr;
 use std::fmt;
 use std::mem;
@@ -2820,6 +2823,11 @@ pub struct SurfaceFullScreenExclusiveInfoEXT {
 
 macro_rules! ptrs {
     ($struct_name:ident, { $($name:ident => ($($param_n:ident: $param_ty:ty),*) -> $ret:ty,)+ }) => (
+        $(
+            paste! {
+                pub type [<PFN_ $name>] = extern "system" fn($($param_ty),*) -> $ret;
+            }
+        )+
         pub struct $struct_name {
             $(
                 pub $name: extern "system" fn($($param_ty),*) -> $ret,
