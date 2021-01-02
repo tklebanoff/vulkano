@@ -169,6 +169,7 @@ pub const STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR: u32 = 1000009000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES: u32 = 1000094000;
 pub const STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK: u32 = 1000122000 + (122 * 1000);
 pub const STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK: u32 = 1000000000 + (123 * 1000);
+pub const STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT: u32 = 1000217000;
 pub const STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT: u32 = 1000128000;
 pub const STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT: u32 = 1000128001;
 pub const STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT: u32 = 1000128002;
@@ -1038,6 +1039,8 @@ pub type DebugUtilsMessengerCallbackDataFlagsEXT = Flags;
 pub type DebugUtilsMessengerEXT = u64;
 
 pub type MacOSSurfaceCreateFlagsMVK = u32;
+
+pub type MetalSurfaceCreateFlagsMVK = u32;
 
 pub type IOSSurfaceCreateFlagsMVK = u32;
 
@@ -2486,6 +2489,14 @@ pub struct MacOSSurfaceCreateInfoMVK {
 }
 
 #[repr(C)]
+pub struct MetalSurfaceCreateInfoEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: MetalSurfaceCreateFlagsEXT,
+    pub pLayer: *const c_void,
+}
+
+#[repr(C)]
 pub struct MVKDeviceConfiguration {
     pub supportDisplayContentsScale: Bool32,
     pub imageFlipY: Bool32,
@@ -2901,6 +2912,7 @@ ptrs!(InstancePointers, {
     DestroyDebugUtilsMessengerEXT => (instance: Instance, messenger: DebugUtilsMessengerEXT, pAllocator: *const AllocationCallbacks) -> Result,
     CreateIOSSurfaceMVK => (instance: Instance, pCreateInfo: *const IOSSurfaceCreateInfoMVK, pAllocator: *const AllocationCallbacks, pSurface: *mut SurfaceKHR) -> Result,
     CreateMacOSSurfaceMVK => (instance: Instance, pCreateInfo: *const MacOSSurfaceCreateInfoMVK, pAllocator: *const AllocationCallbacks, pSurface: *mut SurfaceKHR) -> Result,
+    CreateMetalSurfaceEXT => (instance: Instance, pCreateInfo: *const MetalSurfaceCreateInfoEXT, pAllocator: *const AllocationCallbacks, pSurface: *mut SurfaceKHR) -> Result,
     ActivateMoltenVKLicenseMVK => (licenseID: *const c_char, licenseKey: *const c_char, acceptLicenseTermsAndConditions: Bool32) -> Result,
     ActivateMoltenVKLicensesMVK => () -> Result,
     GetMoltenVKDeviceConfigurationMVK => (device: Device, pConfiguration: *mut MVKDeviceConfiguration) -> Result,
