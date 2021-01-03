@@ -615,7 +615,7 @@ impl<'a> ApplicationInfo<'a> {
     pub fn default_application_version() -> u32 { 0 }
     pub fn default_engine_version()      -> u32 { 0 }
 
-    pub fn internal_object(&self) -> vk::ApplicationInfo {
+    unsafe pub fn internal_object(&self) -> vk::ApplicationInfo {
 
         vk::ApplicationInfo {
 
