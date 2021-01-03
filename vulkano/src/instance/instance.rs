@@ -608,6 +608,9 @@ impl<'a> ApplicationInfo<'a> {
             engine_version: None,
         }
     }
+    pub fn internal_object(&self) -> vk::ApplicationInfo {
+        todo!();
+    }
 }
 
 /// Builds an `ApplicationInfo` from the information gathered by Cargo.
