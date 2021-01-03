@@ -84,6 +84,25 @@ impl Version {
     }
 }
 
+#[inline] pub const fn vk_make_version(major: u8, minor: u8, patch: u8) -> u32 {
+    (((major as u32) << 22) | ((minor as u32) << 12) | (patch as u32))
+}
+
+#[inline] pub const fn vk_version_major(version: u32) -> u8 {
+    ((version) >> 22)  as u8
+}
+
+#[inline] pub const fn vk_version_minor(version: u32) -> u8 {
+    (((version) >> 12) & 0x3ff) as u8
+}
+
+#[inline] pub const fn vk_version_patch(version: u32) -> u8 {
+    ((version) & 0xfff) as u8
+}
+
+// Patch version should always be set to 0
+pub const VK_API_VERSION_1_0: u32 = vk_make_version(1,0,0); 
+
 #[cfg(test)]
 mod tests {
     use super::Version;
