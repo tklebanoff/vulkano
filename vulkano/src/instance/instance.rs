@@ -35,7 +35,7 @@ use VulkanObject;
 
 use features::{Features, FeaturesFfi};
 use instance::{InstanceExtensions, RawInstanceExtensions};
-use version::Version;
+use version::{Version,VK_API_VERSION_1_0};
 
 /// An instance of a Vulkan context. This is the main object that should be created by an
 /// application before everything else.
@@ -608,8 +608,42 @@ impl<'a> ApplicationInfo<'a> {
             engine_version: None,
         }
     }
+
+    pub fn default_application_name()    -> &'static str { "application" }
+    pub fn default_engine_name()         -> &'static str { "engine" }
+
+    pub fn default_application_version() -> u32 { 0 }
+    pub fn default_engine_version()      -> u32 { 0 }
+
     pub fn internal_object(&self) -> vk::ApplicationInfo {
-        todo!();
+
+        vk::ApplicationInfo {
+
+            sType: vk::STRUCTURE_TYPE_APPLICATION_INFO,
+            pNext: std::ptr::null_mut(),
+
+            pApplicationName: match &self.application_name {
+                Some(name) => name.as_ptr() as *const i8,
+                _ => Self::default_application_name().as_ptr() as *const i8,
+            },
+
+            applicationVersion: match self.application_version {
+                Some(version) => version.into_vulkan_version(),
+                _ => Self::default_application_version(),
+            },
+
+            pEngineName: match &self.engine_name {
+                Some(name) => name.as_ptr() as *const i8,
+                _ => Self::default_engine_name().as_ptr() as *const i8,
+            },
+
+            engineVersion: match self.engine_version {
+                Some(version) => version.into_vulkan_version(),
+                _ => Self::default_engine_version(),
+            },
+
+            apiVersion:         VK_API_VERSION_1_0,
+        }
     }
 }
 
