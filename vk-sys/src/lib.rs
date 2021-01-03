@@ -1043,7 +1043,7 @@ pub type DebugUtilsMessengerEXT = u64;
 
 pub type MacOSSurfaceCreateFlagsMVK = u32;
 
-pub type MetalSurfaceCreateFlagsMVK = u32;
+pub type MetalSurfaceCreateFlagsEXT = u32;
 
 pub type IOSSurfaceCreateFlagsMVK = u32;
 
