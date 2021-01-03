@@ -584,38 +584,17 @@ pub struct ApplicationInfo<'a> {
 }
 
 impl<'a> ApplicationInfo<'a> {
-    /// Builds an `ApplicationInfo` from the information gathered by Cargo.
-    ///
-    /// # Panic
-    ///
-    /// - Panics if the required environment variables are missing, which happens if the project
-    ///   wasn't built by Cargo.
-    ///
-    #[deprecated(note = "Please use the `app_info_from_cargo_toml!` macro instead")]
-    pub fn from_cargo_toml() -> ApplicationInfo<'a> {
-        let version = Version {
-            major: env!("CARGO_PKG_VERSION_MAJOR").parse().unwrap(),
-            minor: env!("CARGO_PKG_VERSION_MINOR").parse().unwrap(),
-            patch: env!("CARGO_PKG_VERSION_PATCH").parse().unwrap(),
-        };
-
-        let name = env!("CARGO_PKG_NAME");
-
-        ApplicationInfo {
-            application_name: Some(name.into()),
-            application_version: Some(version),
-            engine_name: None,
-            engine_version: None,
-        }
-    }
-
     pub fn default_application_name()    -> &'static str { "application" }
     pub fn default_engine_name()         -> &'static str { "engine" }
 
     pub fn default_application_version() -> u32 { 0 }
     pub fn default_engine_version()      -> u32 { 0 }
+}
 
-    unsafe pub fn internal_object(&self) -> vk::ApplicationInfo {
+impl<'a> ApplicationInfo<'a> {
+
+    //unsafe because vk::ApplicationInfo holds pointers to arbitrary memory
+    pub unsafe fn internal_object(&self) -> vk::ApplicationInfo {
 
         vk::ApplicationInfo {
 
@@ -645,6 +624,34 @@ impl<'a> ApplicationInfo<'a> {
             apiVersion:         VK_API_VERSION_1_0,
         }
     }
+}
+
+impl<'a> ApplicationInfo<'a> {
+    /// Builds an `ApplicationInfo` from the information gathered by Cargo.
+    ///
+    /// # Panic
+    ///
+    /// - Panics if the required environment variables are missing, which happens if the project
+    ///   wasn't built by Cargo.
+    ///
+    #[deprecated(note = "Please use the `app_info_from_cargo_toml!` macro instead")]
+    pub fn from_cargo_toml() -> ApplicationInfo<'a> {
+        let version = Version {
+            major: env!("CARGO_PKG_VERSION_MAJOR").parse().unwrap(),
+            minor: env!("CARGO_PKG_VERSION_MINOR").parse().unwrap(),
+            patch: env!("CARGO_PKG_VERSION_PATCH").parse().unwrap(),
+        };
+
+        let name = env!("CARGO_PKG_NAME");
+
+        ApplicationInfo {
+            application_name: Some(name.into()),
+            application_version: Some(version),
+            engine_name: None,
+            engine_version: None,
+        }
+    }
+
 }
 
 /// Builds an `ApplicationInfo` from the information gathered by Cargo.
