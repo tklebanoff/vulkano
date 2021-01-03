@@ -1043,9 +1043,9 @@ pub type DebugUtilsMessengerEXT = u64;
 
 pub type MacOSSurfaceCreateFlagsMVK = u32;
 
-pub type MetalSurfaceCreateFlagsEXT = u32;
-
 pub type IOSSurfaceCreateFlagsMVK = u32;
+
+pub type MetalSurfaceCreateFlagsEXT = u32;
 
 pub type DescriptorSetLayoutCreateFlagBits = u32;
 pub const DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR: u32 = 0x00000001;
