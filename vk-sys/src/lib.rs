@@ -2919,6 +2919,10 @@ ptrs!(InstancePointers, {
     GetPhysicalDeviceSurfacePresentModesKHR => (physicalDevice: PhysicalDevice, surface: SurfaceKHR, pPresentModeCount: *mut u32, pPresentModes: *mut PresentModeKHR) -> Result,
     CreateDebugUtilsMessengerEXT => (instance: Instance, pCreateInfo: *const DebugUtilsMessengerCreateInfoEXT, pAllocator: *const AllocationCallbacks, pMessenger: *const DebugUtilsMessengerEXT) -> Result,
     DestroyDebugUtilsMessengerEXT => (instance: Instance, messenger: DebugUtilsMessengerEXT, pAllocator: *const AllocationCallbacks) -> Result,
+
+    // Provided by VK_EXT_debug_utils
+    SubmitDebugUtilsMessageEXT => ( instance: Instance, messageSeverity: DebugUtilsMessageSeverityFlagBitsEXT, messageTypes: DebugUtilsMessageTypeFlagsEXT, pCallbackData: *const DebugUtilsMessengerCallbackDataEXT) -> (),
+
     CreateIOSSurfaceMVK => (instance: Instance, pCreateInfo: *const IOSSurfaceCreateInfoMVK, pAllocator: *const AllocationCallbacks, pSurface: *mut SurfaceKHR) -> Result,
     CreateMacOSSurfaceMVK => (instance: Instance, pCreateInfo: *const MacOSSurfaceCreateInfoMVK, pAllocator: *const AllocationCallbacks, pSurface: *mut SurfaceKHR) -> Result,
     CreateMetalSurfaceEXT => (instance: Instance, pCreateInfo: *const MetalSurfaceCreateInfoEXT, pAllocator: *const AllocationCallbacks, pSurface: *mut SurfaceKHR) -> Result,
