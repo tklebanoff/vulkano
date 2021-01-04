@@ -3085,8 +3085,8 @@ ptrs!(DevicePointers, {
 /// Provided by VK_GOOGLE_display_timing
 #[repr(C)]
 pub struct PresentTimeGOOGLE {
-    presentID:          u32,
-    desiredPresentTime: u64,
+    pub presentID:          u32,
+    pub desiredPresentTime: u64,
 }
 
 
@@ -3103,17 +3103,17 @@ pub struct PresentTimeGOOGLE {
 /// VkPresentTimesInfoGOOGLE structure to the pNext chain of the VkPresentInfoKHR structure.
 #[repr(C)]
 pub struct PresentTimesInfoGOOGLE {
-    sType: StructureType,
-    pNext: *const c_void,
+    pub sType: StructureType,
+    pub pNext: *const c_void,
 
     ///swapchainCount is the number of swapchains 
     ///being presented to by this command.
-    swapchainCount: u32,
+    pub swapchainCount: u32,
 
     ///pTimes is NULL or a pointer to an array of VkPresentTimeGOOGLE 
     ///elements with swapchainCount entries. 
     ///If not NULL, each element of pTimes contains the 
     ///earliest time to present the image corresponding to the entry 
     ///in the VkPresentInfoKHR::pImageIndices array.
-    pTimes: *const PresentTimeGOOGLE,
+    pub pTimes: *const PresentTimeGOOGLE,
 }
