@@ -3146,10 +3146,10 @@ pub struct PresentTimesInfoGOOGLE {
 ///An application that desires its target IPD to always be the same as refreshDuration, can also adjust features until actualPresentTime is never late and presentMargin is satisfactory.
 #[repr(C)]
 pub struct PastPresentationTimingGOOGLE {
-    presentID:              u32,
-    desiredPresentTime:     u64,
-    actualPresentTime:      u64,
-    earliestPresentTime:    u64,
-    presentMargin:          u64,
+    pub presentID:              u32,
+    pub desiredPresentTime:     u64,
+    pub actualPresentTime:      u64,
+    pub earliestPresentTime:    u64,
+    pub presentMargin:          u64,
 }
 //------------------------------------------------------------------------------------end section: Provided by VK_GOOGLE_display_timing
