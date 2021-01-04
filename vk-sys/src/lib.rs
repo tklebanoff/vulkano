@@ -3080,3 +3080,39 @@ ptrs!(DevicePointers, {
     ReleaseFullScreenExclusiveModeEXT => (device: Device, swapchain: SwapchainKHR) -> Result,
     GetBufferDeviceAddressEXT => (device: Device, pInfo: *const BufferDeviceAddressInfo) -> DeviceAddress,
 });
+
+/// Provided by VK_GOOGLE_display_timing
+#[repr(C)]
+pub struct PresentTimeGOOGLE {
+    presentID:          u32,
+    desiredPresentTime: u64,
+}
+
+
+/// Provided by VK_GOOGLE_display_timing
+/// When the VK_GOOGLE_display_timing extension is enabled, 
+/// additional fields can be specified that allow an application 
+/// to specify the earliest time that an image should be displayed. 
+/// This allows an application to avoid stutter that is caused by 
+/// an image being displayed earlier than planned. 
+/// Such stuttering can occur with both fixed and variable-refresh-rate displays, 
+/// because stuttering occurs when the geometry is not correctly positioned for 
+/// when the image is displayed. An application can instruct the presentation engine that 
+/// an image should not be displayed earlier than a specified time by adding a 
+/// VkPresentTimesInfoGOOGLE structure to the pNext chain of the VkPresentInfoKHR structure.
+#[repr(C)]
+pub struct PresentTimesInfoGOOGLE {
+    sType: StructureType,
+    pNext: *const c_void,
+
+    ///swapchainCount is the number of swapchains 
+    ///being presented to by this command.
+    swapchainCount: u32,
+
+    ///pTimes is NULL or a pointer to an array of VkPresentTimeGOOGLE 
+    ///elements with swapchainCount entries. 
+    ///If not NULL, each element of pTimes contains the 
+    ///earliest time to present the image corresponding to the entry 
+    ///in the VkPresentInfoKHR::pImageIndices array.
+    pTimes: *const PresentTimeGOOGLE,
+}
