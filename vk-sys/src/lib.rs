@@ -3080,6 +3080,21 @@ ptrs!(DevicePointers, {
     AcquireFullScreenExclusiveModeEXT => (device: Device, swapchain: SwapchainKHR) -> Result,
     ReleaseFullScreenExclusiveModeEXT => (device: Device, swapchain: SwapchainKHR) -> Result,
     GetBufferDeviceAddressEXT => (device: Device, pInfo: *const BufferDeviceAddressInfo) -> DeviceAddress,
+
+    /// Provided by VK_GOOGLE_display_timing
+    ///
+    ///The implementation will maintain a limited amount of history of timing information about previous presents. 
+    ///Because of the asynchronous nature of the presentation engine, the timing information for a given 
+    ///vkQueuePresentKHR command will become available some time later. These time values can be asynchronously queried, 
+    ///and will be returned if available. All time values are in nanoseconds, relative to a monotonically-increasing clock (e.g. CLOCK_MONOTONIC (see clock_gettime(2)) on Android and Linux).
+    ///To asynchronously query the presentation engine, for newly-available timing information about one or more previous presents to a given swapchain, call:
+    GetPastPresentationTimingGOOGLE => (device: Device, swapchain: SwapchainKHR, pPresentationTimingCount: *mut u32, pPresentationTimings: *mut PastPresentationTimingGoogle) -> Result,
+    ///If pPresentationTimings is NULL, then the number of newly-available timing records for the given swapchain is returned in pPresentationTimingCount. 
+    ///Otherwise, pPresentationTimingCount must point to a variable set by the user to the number of elements in the pPresentationTimings array, 
+    ///and on return the variable is overwritten with the number of structures actually written to pPresentationTimings. 
+    ///If the value of pPresentationTimingCount is less than the number of newly-available timing records, at most pPresentationTimingCount structures will be written. 
+    ///If pPresentationTimingCount is smaller than the number of newly-available timing records for the given swapchain, VK_INCOMPLETE will be returned instead of VK_SUCCESS 
+    ///to indicate that not all the available values were returned.
 });
 
 /// Provided by VK_GOOGLE_display_timing
@@ -3091,29 +3106,43 @@ pub struct PresentTimeGOOGLE {
 
 
 /// Provided by VK_GOOGLE_display_timing
-/// When the VK_GOOGLE_display_timing extension is enabled, 
-/// additional fields can be specified that allow an application 
-/// to specify the earliest time that an image should be displayed. 
-/// This allows an application to avoid stutter that is caused by 
-/// an image being displayed earlier than planned. 
-/// Such stuttering can occur with both fixed and variable-refresh-rate displays, 
-/// because stuttering occurs when the geometry is not correctly positioned for 
-/// when the image is displayed. An application can instruct the presentation engine that 
-/// an image should not be displayed earlier than a specified time by adding a 
-/// VkPresentTimesInfoGOOGLE structure to the pNext chain of the VkPresentInfoKHR structure.
+///
+/// When the VK_GOOGLE_display_timing extension is enabled, additional fields can be specified that allow an application 
+/// to specify the earliest time that an image should be displayed.  This allows an application to avoid stutter that is caused by 
+/// an image being displayed earlier than planned.  Such stuttering can occur with both fixed and variable-refresh-rate displays, 
+/// because stuttering occurs when the geometry is not correctly positioned for when the image is displayed. An application can instruct the presentation engine that 
+/// an image should not be displayed earlier than a specified time by adding a VkPresentTimesInfoGOOGLE structure to the pNext chain of the VkPresentInfoKHR structure.
 #[repr(C)]
 pub struct PresentTimesInfoGOOGLE {
     pub sType: StructureType,
     pub pNext: *const c_void,
 
-    ///swapchainCount is the number of swapchains 
-    ///being presented to by this command.
+    ///swapchainCount is the number of swapchains being presented to by this command.
     pub swapchainCount: u32,
 
-    ///pTimes is NULL or a pointer to an array of VkPresentTimeGOOGLE 
-    ///elements with swapchainCount entries. 
-    ///If not NULL, each element of pTimes contains the 
-    ///earliest time to present the image corresponding to the entry 
+    ///pTimes is NULL or a pointer to an array of VkPresentTimeGOOGLE elements with swapchainCount entries. 
+    ///If not NULL, each element of pTimes contains the earliest time to present the image corresponding to the entry 
     ///in the VkPresentInfoKHR::pImageIndices array.
     pub pTimes: *const PresentTimeGOOGLE,
+}
+
+/// Provided by VK_GOOGLE_display_timing
+///
+///Structure containing timing information about a previously-presented image The results for a given swapchain and presentID are only returned 
+///once from vkGetPastPresentationTimingGOOGLE.
+///
+///The application can use the VkPastPresentationTimingGOOGLE values to occasionally adjust its timing. For example, 
+///if actualPresentTime is later than expected (e.g. one refreshDuration late), the application may increase its target IPD to a higher multiple of refreshDuration 
+///(e.g. decrease its frame rate from 60Hz to 30Hz).  If actualPresentTime and earliestPresentTime are consistently different, and if presentMargin is consistently large enough, 
+///the application may decrease its target IPD to a smaller multiple of refreshDuration (e.g. increase its frame rate from 30Hz to 60Hz).  
+///If actualPresentTime and earliestPresentTime are same, and if presentMargin is consistently high, the application may delay the start of its input-render-present loop in order to 
+///decrease the latency between user input and the corresponding present (always leaving some margin in case a new image takes longer to render than the previous image). 
+///An application that desires its target IPD to always be the same as refreshDuration, can also adjust features until actualPresentTime is never late and presentMargin is satisfactory.
+#[repr(C)]
+pub struct VkPastPresentationTimingGOOGLE {
+    presentID:              u32,
+    desiredPresentTime:     u64,
+    actualPresentTime:      u64,
+    earliestPresentTime:    u64,
+    presentMargin:          u64,
 }
