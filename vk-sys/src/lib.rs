@@ -3086,6 +3086,7 @@ ptrs!(DevicePointers, {
     GetBufferDeviceAddressEXT => (device: Device, pInfo: *const BufferDeviceAddressInfo) -> DeviceAddress,
 
     GetPastPresentationTimingGOOGLE => (device: Device, swapchain: SwapchainKHR, pPresentationTimingCount: *mut u32, pPresentationTimings: *mut PastPresentationTimingGOOGLE) -> Result,
+    GetRefreshCycleDurationGOOGLE => (device: Device, swapchain: SwapchainKHR, pDisplayTimingProperties: *mut RefreshCycleDurationGOOGLE) -> Result,
 });
 
 //------------------------------------------------------------------------------------section: Provided by VK_GOOGLE_display_timing
@@ -3155,5 +3156,13 @@ pub struct PastPresentationTimingGOOGLE {
     pub actualPresentTime:      u64,
     pub earliestPresentTime:    u64,
     pub presentMargin:          u64,
+}
+
+/// Provided by VK_GOOGLE_display_timing
+/// Structure containing the RC duration of a display
+#[repr(C)]
+pub struct RefreshCycleDurationGOOGLE {
+    ///refreshDuration is the number of nanoseconds from the start of one refresh cycle to the next.
+    refreshDuration: u64,
 }
 //------------------------------------------------------------------------------------end section: Provided by VK_GOOGLE_display_timing
