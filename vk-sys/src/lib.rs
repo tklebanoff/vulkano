@@ -3163,6 +3163,6 @@ pub struct PastPresentationTimingGOOGLE {
 #[repr(C)]
 pub struct RefreshCycleDurationGOOGLE {
     ///refreshDuration is the number of nanoseconds from the start of one refresh cycle to the next.
-    refreshDuration: u64,
+    pub refreshDuration: u64,
 }
 //------------------------------------------------------------------------------------end section: Provided by VK_GOOGLE_display_timing
