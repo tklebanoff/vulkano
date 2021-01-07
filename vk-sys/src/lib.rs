@@ -3166,35 +3166,35 @@ pub struct RefreshCycleDurationGOOGLE {
     pub refreshDuration: u64,
 }
 //------------------------------------------------------------------------------------end section: Provided by VK_GOOGLE_display_timing
-pub const VK_KHR_SURFACE_SPEC_VERSION: u32 = 25;
-pub const VK_KHR_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_surface";
+pub const KHR_SURFACE_SPEC_VERSION: u32 = 25;
+pub const KHR_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_surface";
 
-pub const VK_KHR_XLIB_SURFACE_SPEC_VERSION: u32 = 6;
-pub const VK_KHR_XLIB_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_xlib_surface";
+pub const KHR_XLIB_SURFACE_SPEC_VERSION: u32 = 6;
+pub const KHR_XLIB_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_xlib_surface";
 
-pub const VK_KHR_XCB_SURFACE_SPEC_VERSION: u32 = 6;
-pub const VK_KHR_XCB_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_xcb_surface";
+pub const KHR_XCB_SURFACE_SPEC_VERSION: u32 = 6;
+pub const KHR_XCB_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_xcb_surface";
 
-pub const VK_KHR_MIR_SURFACE_SPEC_VERSION: u32 = 4;
-pub const VK_KHR_MIR_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_mir_surface";
+pub const KHR_MIR_SURFACE_SPEC_VERSION: u32 = 4;
+pub const KHR_MIR_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_mir_surface";
 
-pub const VK_KHR_WIN32_SURFACE_SPEC_VERSION: u32 = 5;
-pub const VK_KHR_WIN32_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_win32_surface";
+pub const KHR_WIN32_SURFACE_SPEC_VERSION: u32 = 5;
+pub const KHR_WIN32_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_win32_surface";
 
-pub const VK_KHR_ANDROID_SURFACE_SPEC_VERSION: u32 = 6;
-pub const VK_KHR_ANDROID_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_android_surface";
+pub const KHR_ANDROID_SURFACE_SPEC_VERSION: u32 = 6;
+pub const KHR_ANDROID_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_android_surface";
 
-pub const VK_KHR_WAYLAND_SURFACE_SPEC_VERSION: u32 = 5;
-pub const VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_wayland_surface";
+pub const KHR_WAYLAND_SURFACE_SPEC_VERSION: u32 = 5;
+pub const KHR_WAYLAND_SURFACE_EXTENSION_NAME: &'static str = "VK_KHR_wayland_surface";
 
-pub const VK_KHR_SWAPCHAIN_SPEC_VERSION: u32 = 68;
-pub const VK_KHR_SWAPCHAIN_EXTENSION_NAME: &'static str = "VK_KHR_swapchain";
+pub const KHR_SWAPCHAIN_SPEC_VERSION: u32 = 68;
+pub const KHR_SWAPCHAIN_EXTENSION_NAME: &'static str = "VK_KHR_swapchain";
 
-pub const VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION: u32 = 9;
-pub const VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME: &'static str = "VK_KHR_display_swapchain";
+pub const KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION: u32 = 9;
+pub const KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME: &'static str = "VK_KHR_display_swapchain";
 
-pub const VK_KHR_DISPLAY_SPEC_VERSION: u32 = 21;
-pub const VK_KHR_DISPLAY_EXTENSION_NAME: &'static str = "VK_KHR_display";
+pub const KHR_DISPLAY_SPEC_VERSION: u32 = 21;
+pub const KHR_DISPLAY_EXTENSION_NAME: &'static str = "VK_KHR_display";
 
-pub const VK_EXT_DEBUG_REPORT_SPEC_VERSION: u32 = 3;
-pub const VK_EXT_DEBUG_REPORT_EXTENSION_NAME: &'static str = "VK_EXT_debug_report";
+pub const EXT_DEBUG_REPORT_SPEC_VERSION: u32 = 3;
+pub const EXT_DEBUG_REPORT_EXTENSION_NAME: &'static str = "VK_EXT_debug_report";
