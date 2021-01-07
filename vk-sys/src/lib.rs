@@ -3198,3 +3198,6 @@ pub const KHR_DISPLAY_EXTENSION_NAME: &'static str = "VK_KHR_display";
 
 pub const EXT_DEBUG_REPORT_SPEC_VERSION: u32 = 3;
 pub const EXT_DEBUG_REPORT_EXTENSION_NAME: &'static str = "VK_EXT_debug_report";
+
+pub const VK_EXT_METAL_SURFACE_SPEC_VERSION: u32 = 1;
+pub const VK_EXT_METAL_SURFACE_EXTENSION_NAME: &'static str = "VK_EXT_metal_surface";
