@@ -136,7 +136,16 @@ unsafe fn winit_to_surface<W: SafeBorrow<Window>>(
     Surface::from_anativewindow(instance, win.borrow().native_window(), win)
 }
 
-#[cfg(all(unix, not(target_os = "android"), not(target_os = "macos")))]
+#[cfg(target_os = "ios")]
+unsafe fn winit_to_surface<W: SafeBorrow<Window>>(
+    instance: Arc<Instance>,
+    win: W,
+) -> Result<Arc<Surface<W>>, SurfaceCreationError> {
+
+    todo!();
+}
+
+#[cfg(all(unix, not(target_os = "ios"), not(target_os = "android"), not(target_os = "macos")))]
 unsafe fn winit_to_surface<W: SafeBorrow<Window>>(
     instance: Arc<Instance>,
     win: W,
