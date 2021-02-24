@@ -2940,7 +2940,115 @@ ptrs!(InstancePointers, {
     GetPhysicalDeviceQueueFamilyProperties2KHR => (physicalDevice: PhysicalDevice, pQueueFamilyPropertiesCount: *mut u32, pQueueFamilyProperties: *mut QueueFamilyProperties2KHR) -> (),
     GetPhysicalDeviceMemoryProperties2KHR => (physicalDevice: PhysicalDevice, pMemoryProperties: *mut PhysicalDeviceMemoryProperties2KHR) -> (),
     GetPhysicalDeviceSparseImageFormatProperties2KHR => (physicalDevice: PhysicalDevice, pFormatInfo: *const PhysicalDeviceSparseImageFormatInfo2KHR, pPropertyCount: *mut u32, pProperties: *mut SparseImageFormatProperties2KHR) -> (),
+
+    // Provided by VK_KHR_get_surface_capabilities2
+    GetPhysicalDeviceSurfaceCapabilities2KHR => ( physicalDevice: PhysicalDevice, pSurfaceInfo: *const PhysicalDeviceSurfaceInfo2KHR, pSurfaceCapabilities: *mut SurfaceCapabilities2KHR ) -> Result,
+
+    // Provided by VK_EXT_debug_report
+    CreateDebugReportCallbackEXT => (instance: Instance, pCreateInfo: *const DebugReportCallbackCreateInfoEXT, pAllocator: *const AllocationCallbacks, pCallback: *mut DebugReportCallbackEXT) -> Result,
+
+    // Provided by VK_EXT_debug_report
+    DestroyDebugReportCallbackEXT => ( instance: Instance, callback: DebugReportCallbackEXT, pAllocator: *const AllocationCallbacks) -> (),
+
+    // Provided by VK_EXT_debug_marker
+    DebugMarkerSetObjectNameEXT => ( device: Device, pNameInfo: *const DebugMarkerObjectNameInfoEXT) -> Result,
+
 });
+
+// Provided by VK_EXT_debug_report
+pub struct DebugReportCallbackCreateInfoEXT {
+    pub sType:       StructureType,
+    pub pNext:       *const c_void,
+    pub flags:       DebugReportFlagsEXT,
+    pub pfnCallback: DebugReportCallbackEXT,
+    pub pUserData:   *mut c_void,
+}
+
+// Provided by VK_EXT_debug_marker
+pub struct DebugMarkerObjectNameInfoEXT {
+    pub sType:      StructureType,
+    pub pNext:      *const c_void,
+    pub objectType: DebugReportObjectTypeEXT,
+    pub object:     u64,
+    pub pObjectName: *const char,
+}
+
+pub type DebugReportCallbackEXT = u64;
+pub type DebugReportFlagsEXT = Flags;
+
+// Provided by VK_EXT_debug_report, VK_EXT_debug_marker
+pub type DebugReportObjectTypeEXT = u64;
+pub const DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT:                   u64 = 0;
+pub const DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT:                  u64 = 1;
+pub const DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT:           u64 = 2;
+pub const DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT:                    u64 = 3;
+pub const DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT:                     u64 = 4;
+pub const DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT:                 u64 = 5;
+pub const DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT:            u64 = 6;
+pub const DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT:                     u64 = 7;
+pub const DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT:             u64 = 8;
+pub const DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT:                    u64 = 9;
+pub const DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT:                     u64 = 10;
+pub const DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT:                     u64 = 11;
+pub const DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT:                u64 = 12;
+pub const DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT:               u64 = 13;
+pub const DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT:                u64 = 14;
+pub const DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT:             u64 = 15;
+pub const DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT:            u64 = 16;
+pub const DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT:           u64 = 17;
+pub const DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT:               u64 = 18;
+pub const DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT:                  u64 = 19;
+pub const DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT:     u64 = 20;
+pub const DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT:                   u64 = 21;
+pub const DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT:           u64 = 22;
+pub const DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT:            u64 = 23;
+pub const DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT:               u64 = 24;
+pub const DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT:              u64 = 25;
+pub const DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT:               u64 = 26;
+pub const DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT:             u64 = 27;
+pub const DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT: u64 = 28;
+pub const DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT:               u64 = 29;
+pub const DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT:          u64 = 30;
+pub const DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT:      u64 = 33;
+
+// Provided by VK_KHR_sampler_ycbcr_conversion with VK_EXT_debug_report, VK_EXT_debug_report with VK_VERSION_1_1
+pub const DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT:       u64 = 1000156000;
+
+// Provided by VK_EXT_debug_report with VK_VERSION_1_1
+pub const DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT:     u64 = 1000085000;
+
+// Provided by VK_KHR_acceleration_structure
+pub const DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT:     u64 = 1000150000;
+
+// Provided by VK_NV_ray_tracing
+pub const DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT:      u64 = 1000165000;
+pub const DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT:                   u64 = DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT;
+pub const DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT:               u64 = DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT;
+
+// Provided by VK_KHR_descriptor_update_template with VK_EXT_debug_report
+pub const DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT: u64 = DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT;
+
+// Provided by VK_KHR_sampler_ycbcr_conversion
+pub const DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT:   u64 = DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT;
+
+
+/// Provided by VK_KHR_get_surface_capabilities2
+///
+/// Structure specifying a surface and related swapchain creation parameters
+pub struct PhysicalDeviceSurfaceInfo2KHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub surface: SurfaceKHR,
+}
+
+/// Provided by VK_KHR_get_surface_capabilities2
+///
+/// Structure describing capabilities of a surface
+pub struct SurfaceCapabilities2KHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub surfaceCapabilities: SurfaceCapabilitiesKHR,
+}
 
 ptrs!(DevicePointers, {
     DestroyDevice => (device: Device, pAllocator: *const AllocationCallbacks) -> (),
