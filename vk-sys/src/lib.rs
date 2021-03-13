@@ -3115,6 +3115,15 @@ ptrs!(InstancePointers, {
 });
 
 // Provided by VK_EXT_debug_report
+pub type DebugReportFlagBitsEXT = u32;
+pub const DEBUG_REPORT_INFORMATION_BIT_EXT:         u32 = 0x00000001;
+pub const DEBUG_REPORT_WARNING_BIT_EXT:             u32 = 0x00000002;
+pub const DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT: u32 = 0x00000004;
+pub const DEBUG_REPORT_ERROR_BIT_EXT:               u32 = 0x00000008;
+pub const DEBUG_REPORT_DEBUG_BIT_EXT:               u32 = 0x00000010;
+
+
+// Provided by VK_EXT_debug_report
 #[derive(Debug)]
 pub struct DebugReportCallbackCreateInfoEXT {
     pub sType:       StructureType,
