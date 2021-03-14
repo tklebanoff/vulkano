@@ -78,7 +78,7 @@ mod tests;
 #[macro_use]
 mod extensions;
 mod features;
-mod version;
+pub mod version;
 
 pub mod buffer;
 pub mod command_buffer;
